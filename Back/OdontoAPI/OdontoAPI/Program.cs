@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using OdontoAPI.Data;
 using OdontoAPI.Service.PacienteService;
+using OdontoAPI.Service.TokenService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPacienteInterface, PacienteService>();
+builder.Services.AddTransient<JwtService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
