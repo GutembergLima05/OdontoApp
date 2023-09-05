@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OdontoAPI.Models;
 using OdontoAPI.Service.PacienteService;
 
 namespace OdontoAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class PacienteController : ControllerBase
@@ -36,5 +38,10 @@ namespace OdontoAPI.Controllers
             return Ok(await _pacienteInterface.CreatePaciente(novoPaciente));
         }
 
+        [HttpDelete]
+        public async Task<ActionResult<ServiceResponse<List<PacienteModel>>>> DeletePaciente(int id)
+        {
+            return Ok(await _pacienteInterface.DeletePaciente(id));
+        }
     }
 }
